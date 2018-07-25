@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zccoder.mybatis2.ch7.cache.mapper.UserMapper">
+
+    <resultMap id="baseResultMap" type="com.zccoder.mybatis2.ch7.cache.model.SysUser">
+        <id column="id" property="id"/>
+        <result column="user_name" property="userName"/>
+        <result column="user_password" property="userPassword"/>
+        <result column="user_email" property="userEmail"/>
+        <result column="user_info" property="userInfo"/>
+
+        <result column="head_img" property="headImg" jdbcType="BLOB"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="baseColumnQuery">
+        id, user_name, user_password, user_email, user_info, head_img, create_time
+    </sql>
+    <sql id="baseColumnInsert">
+        user_name, user_password, user_email, user_info, head_img, create_time
+    </sql>
+
+    <select id="selectById" resultMap="baseResultMap">
+        SELECT
+        <include refid="baseColumnQuery"/>
+        FROM sys_user
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectAll" resultMap="baseResultMap">
+        select
+        <include refid="baseColumnQuery"/>
+        from sys_user
+    </select>
+
+    <insert id="insert">
+        insert into sys_user (<include refid="baseColumnQuery"/>)
+        values(#{id},#{userName},#{userPassword},#{userEmail},#{userInfo},#{headImg,jdbcType=BLOB},#{createTime,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insert2" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_user (<include refid="baseColumnInsert"/>)
+        values(#{userName},#{userPassword},#{userEmail},#{userInfo},#{headImg,jdbcType=BLOB},#{createTime,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insert3">
+        insert into sys_user (<include refid="baseColumnInsert"/>)
+        values(#{userName},#{userPassword},#{userEmail},#{userInfo},#{headImg,jdbcType=BLOB},#{createTime,jdbcType=TIMESTAMP})
+        <selectKey keyColumn="id" resultType="long" keyProperty="id" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <update id="updateById">
+        update sys_user
+        set user_name = #{userName},
+            user_password = #{userPassword},
+            user_email = #{userEmail},
+            user_info = #{userInfo},
+            head_img = #{headImg,jdbcType=BLOB},
+            create_time = #{createTime,jdbcType=TIMESTAMP}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        delete from sys_user where id = #{id}
+    </delete>
+
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zccoder.mybatis2.ch7.cache.mapper.RoleMapper">
+
+    <!--使用redis缓存-->
+    <cache type="org.mybatis.caches.redis.RedisCache"/>
+
+    <!--使用ehcahe缓存-->
+    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>-->
+
+    <!--使用默认的二级缓存-->
+    <!--<cache -->
+        <!--eviction="FIFO"-->
+        <!--flushInterval="60000"-->
+        <!--size="512"-->
+        <!--readOnly="false"/>-->
+
+    <resultMap id="baseResultMap" type="com.zccoder.mybatis2.ch7.cache.model.SysRole">
+        <id column="id" property="id"/>
+        <result column="role_name" property="roleName"/>
+        <result column="enabled" property="enabled"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <sql id="baseColumnQuery">
+        id,role_name,enabled,create_by,create_time
+    </sql>
+
+    <select id="selectById" resultMap="baseResultMap">
+            SELECT
+        <include refid="baseColumnQuery"/>
+        FROM sys_role
+        WHERE id = #{roleId}
+    </select>
+</mapper>
