@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zccoder.mybatis2.ch6.query.mapper.CountryMapper">
+
+    <select id="listAll" resultType="Country">
+        SELECT
+            id,
+            countryname,
+            countrycode
+        FROM country
+    </select>
+
+    <select id="selectCountries" statementType="CALLABLE" useCache="false">
+        {call SELECT_COUNTRIES(
+                #{list1,mode=OUT,jdbcType=CURSOR,javaType=ResultSet,resultMap=BaseResultMap},
+                #{list2,mode=OUT,jdbcType=CURSOR,javaType=ResultSet,resultMap=BaseResultMap}
+        )}
+    </select>
+
+</mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+        <!--开启自动字段下划线转驼峰命名-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="aggressiveLazyLoading" value="false"/>
+    </settings>
+
+    <typeAliases>
+        <package name="com.zccoder.mybatis2.ch6.query.model"/>
+    </typeAliases>
+
+    <typeHandlers>
+        <typeHandler javaType="com.zccoder.mybatis2.ch6.query.type.Enabled" handler="org.apache.ibatis.type.EnumOrdinalTypeHandler"/>
+        <typeHandler javaType="com.zccoder.mybatis2.ch6.query.type.EnabledType" handler="com.zccoder.mybatis2.ch6.query.type.EnabledTypeHandler"/>
+    </typeHandlers>
+
+    <environments default="dev">
+        <environment id="dev">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/mybatis2?characterEncoding=utf8"/>
+                <property name="username" value="root"/>
+                <property name="password" value="root"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <package name="com.zccoder.mybatis2.ch6.query.mapper"/>
+    </mappers>
+
+</configuration>
