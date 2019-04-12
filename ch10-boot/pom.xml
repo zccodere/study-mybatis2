@@ -12,7 +12,7 @@
     <artifactId>ch10-boot</artifactId>
 
     <properties>
-        <spring.boot.version>1.5.0.RELEASE</spring.boot.version>
+        <spring.boot.version>1.5.20.RELEASE</spring.boot.version>
     </properties>
 
     <dependencyManagement>
