@@ -5,7 +5,7 @@
 <configuration>
     
     <settings>
-        <setting name="logImpl" value="LOG4J"/>
+        <setting name="logImpl" value="LOG4J2"/>
         <!--开启自动字段下划线转驼峰命名-->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>

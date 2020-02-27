@@ -3,15 +3,15 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-    
+
     <settings>
-        <setting name="logImpl" value="LOG4J"/>
+        <setting name="logImpl" value="LOG4J2"/>
     </settings>
 
     <typeAliases>
         <package name="com.zccoder.mybatis2.ch1.start.model"/>
     </typeAliases>
-    
+
     <environments default="dev">
         <environment id="dev">
             <transactionManager type="JDBC"/>
@@ -25,7 +25,7 @@
     </environments>
 
     <mappers>
-        <mapper resource="com/zccoder/mybatis2/ch1/start/mapper/CountryMapper.xml" />
+        <mapper resource="com/zccoder/mybatis2/ch1/start/mapper/CountryMapper.xml"/>
     </mappers>
 
 </configuration>
