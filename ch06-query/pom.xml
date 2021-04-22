@@ -14,7 +14,7 @@
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
-            <version>3.4.5</version>
+            <version>3.5.6</version>
         </dependency>
         <!--对Java 8 日期（JSR-310）的支持，当MyBatis是3.4.0以上版本时，添加以下依赖即可-->
         <dependency>
